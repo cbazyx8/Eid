@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Mubarak</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #2c3e50, #3498db);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            color: #fff;
+        }
+        .container {
+            text-align: center;
+            z-index: 1;
+        }
+        .moon {
+            width: 100px;
+            height: 100px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translate(-50%, 0);
+            }
+            50% {
+                transform: translate(-50%, -20px);
+            }
+        }
+        .stars {
+            position: absolute;
+            background: #fff;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+        }
+        .small-star {
+            width: 2px;
+            height: 2px;
+            animation: twinkling 1.5s infinite ease-in-out;
+        }
+        .large-star {
+            width: 4px;
+            height: 4px;
+            animation: twinkling 2s infinite ease-in-out;
+        }
+        @keyframes twinkling {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+        .greeting {
+            font-size: 3em;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            animation: fadeIn 2s ease-in;
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        .lantern {
+            width: 50px;
+            height: 80px;
+            background: #ffdd57;
+            position: absolute;
+            top: -100px;
+            border-radius: 0 0 50% 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            animation: swing 4s ease-in-out infinite;
+        }
+        .lantern:before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: #ffdd57;
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50%;
+        }
+        .lantern:after {
+            content: '';
+            width: 2px;
+            height: 30px;
+            background: #000;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .lantern.red {
+            background: #ff6b6b;
+        }
+        .lantern.green {
+            background: #6bff6b;
+        }
+        @keyframes swing {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(10deg);
+            }
+        }
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .cloud:before, .cloud:after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+        }
+        .cloud:before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 10px;
+        }
+        .cloud:after {
+            width: 70px;
+            height: 70px;
+            top: -35px;
+            left: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="moon"></div>
+        <div class="greeting">Eid Mubarak</div>
+    </div>
+    <script>
+        function createElement(type, className, duration, removeAfter) {
+            const element = document.createElement('div');
+            element.className = className;
+            element.style.top = Math.random() * 100 + '%';
+            element.style.left = Math.random() * 100 + '%';
+            if (duration) {
+                element.style.animationDuration = duration + 's';
+            }
+            document.body.appendChild(element);
+            setTimeout(() => {
+                element.remove();
+            }, removeAfter);
+        }
+
+        function createStar() {
+            const sizeClass = Math.random() > 0.5 ? 'small-star' : 'large-star';
+            createElement('div', `stars ${sizeClass}`, 1.5, 3000);
+        }
+
+        setInterval(createStar, 500);
+
+        function createLantern() {
+            const colors = ['', 'red', 'green'];
+            const colorClass = colors[Math.floor(Math.random() * colors.length)];
+            createElement('div', `lantern ${colorClass}`, 4, 10000);
+        }
+
+        setInterval(createLantern, 2000);
+
+        function createCloud() {
+            createElement('div', 'cloud', 15, 15000);
+        }
+
+        setInterval(createCloud, 5000);
+    </script>
+</body>
+</html>
